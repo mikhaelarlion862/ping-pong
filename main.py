@@ -54,6 +54,9 @@ ball = GameSprite('tenis_ball.png', 250, 300, 50, 50, 5)
 
 clock = time.Clock()
 
+speed_x = 3
+speed_y = 3
+
 game = True
 
 while game:
@@ -70,8 +73,21 @@ while game:
     p1.move_p1()
     p2.move_p2()
 
+#bola bergerk di awl
+    ball.rect.x += speed_x
+    ball.rect.y += speed_y
+
+    if ball.rect.y > height - 50 or ball.rect.y < 0:
+        speed_y *= -1
+
+    if sprite.collide_rect(p1, ball) or sprite.collide_rect(p2, ball):
+        speed_x *= -1
+        speed_y *= 1
+
     display.update()
     clock.tick(60)
+
+
 
 
 
